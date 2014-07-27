@@ -1,0 +1,120 @@
+html{overflow: hidden;width: 100%;height: 100%;}
+body{background: #fff;padding-top: 50px;overflow: hidden;margin: 0;}
+
+/*客户信息*/
+#infor{position: absolute;top: 0;left: 0;height: 54px;width: 100%; border-bottom:1px solid #c9cbca;overflow: hidden;background: url(image/style.png) repeat-x 0 -5px;}
+
+
+/*聊天窗*/
+
+.chart_box{position: absolute;top: 55px;left: 0; bottom: 118px;/*width: 100%;*/width: 550px; overflow-y:scroll;overflow-x: hidden;
+background: #f2f4f5;
+background: -webkit-gradient(linear,left top,left bottom,from(#fafbfb),to(#f2f4f5));
+background: -webkit-linear-gradient(#fafbfb,#f2f4f5);
+background: -moz-linear-gradient(#fafbfb,#f2f4f5);
+background: -ms-linear-gradient(#fafbfb,#f2f4f5);
+background: -o-linear-gradient(#fafbfb,#f2f4f5);
+-pie-background:linear-gradient(#fafbfb,#f2f4f5);
+background: linear-gradient(#fafbfb,#f2f4f5);
+_height:407px;_bottom:auto;}
+
+#chart{position: relative;}
+
+
+
+/*输入*/
+#enter{position: absolute;bottom: 5px;left: 5px;right:5px;background: #fff; /*ie6必须设置background*/white-space: pre; height: 80px;line-height:22px;font-size: 14px; outline:none;overflow:auto;
+_position: relative;_margin: 0 5px;_top:445px;_left:0;
+/*width:expression(parseInt(this.parentNode.currentStyle.width) - parseInt(this.currentStyle.left)- parseInt(this.currentStyle.right) +'px');*/
+}
+#enter div,#enter p{margin: 0;padding: 0;}
+
+
+
+
+
+/*聊天工具*/
+#tools	{position: absolute;width: 100%; height: 18px;padding: 8px 10px 0; border-top:1px solid #fff;bottom: 90px;}
+#tools button {float: left;border:none;margin-right: 9px; outline:none;width: 18px;height: 18px;background-image: url(image/style.png) ;background-color:#f8f8f8; cursor:pointer;  }
+#tools_face	{background-position: 0 -72px;}
+#tools_cut	{background-position: -18px -72px;}
+#tools_pop	{background-position: -36px -72px;}
+#tools_pic	{background-position: -54px -72px;}
+#tools_hist	{background-position: -72px -72px;}
+
+#tools_face:hover{background-position: 0 -90px;}
+#tools_cut:hover{background-position: -18px -90px;}
+#tools_pop:hover{background-position: -36px -90px;}
+#tools_pic:hover{background-position: -54px -90px;}
+#tools_hist:hover{background-position: -72px -90px;}
+
+
+
+#tools_face_cnt {display: none; position: absolute;bottom: 120px;left: 10px;max-width:360px;_width: 360px; border:1px solid #ddd;box-shadow: 0px 2px 5px rgba(0,0,0,0.2);background: #fff;border-radius: 3px;  }
+#tools_face_cnt img{cursor:pointer; }
+
+
+
+/*客服聊天记录*/
+.server{clear:both;position: relative; text-align: left;margin:10px 40px 10px 20px; }
+.server i{position: absolute;left: -7px;top: 0px;width:17px;height:9px;overflow: hidden; background: url(image/style.png) 0 -234px;  }
+
+.server div{
+position: relative;
+display: inline-block;
+*display: inline;
+*zoom:1;
+padding: 10px 15px;
+min-height: 16px;
+word-break: break-all;
+line-height: 1.4; 
+background: #97c94c;
+background: -webkit-gradient(linear,left top,left bottom,from(#ebf4fd),to(#d6e5f8));
+background: -webkit-linear-gradient(#ebf4fd,#d6e5f8);
+background: -moz-linear-gradient(#ebf4fd,#d6e5f8);
+background: -ms-linear-gradient(#ebf4fd,#d6e5f8);
+background: -o-linear-gradient(#ebf4fd,#d6e5f8);
+-pie-background:linear-gradient(#ebf4fd,#d6e5f8);
+background: linear-gradient(#ebf4fd,#d6e5f8);
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+border: 1px solid #a9c1dc;
+box-shadow: 0px 1px 1px #e1e5e7;
+behavior:url(PIE.htc);
+}
+
+
+
+
+
+/*用户聊天记录*/
+.user{position: relative;margin:10px 20px 10px 40px;text-align: right;clear:both;  }
+
+.user i{position: absolute;right: -6px;_right:10px; top: 0px;width:11px;height:9px;overflow: hidden; background: url(image/style.png) -24px -234px;}
+.user div{
+text-align: left;
+position: relative;
+display: inline-block;
+*display: inline;
+*zoom:1;
+_float:right; 
+padding: 10px 15px;
+min-height: 16px;
+word-break: break-all;
+line-height: 1.4; 
+background: #f3f3f4;
+background: -webkit-gradient(linear,left top,left bottom,from(#f3f3f4,#e4e4e5));
+background: -webkit-linear-gradient(#f3f3f4,#e4e4e5);
+background: -moz-linear-gradient(#f3f3f4,#e4e4e5);
+background: -ms-linear-gradient(#f3f3f4,#e4e4e5);
+background: -o-linear-gradient(#f3f3f4,#e4e4e5);
+-pie-background:linear-gradient(#f3f3f4,#e4e4e5);
+background: linear-gradient(#f3f3f4,#e4e4e5);
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+border: 1px solid #b9bec5;
+box-shadow: 0px 1px 1px #d6dadb;
+behavior:url(PIE.htc);
+} 

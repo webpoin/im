@@ -1,0 +1,115 @@
+@charset "utf-8";
+/***
+@Author:     webpoin
+@Email:      1357113262@qq.com
+***/
+
+html{*border:none;overflow-x:hidden;}
+body{margin:0;font-family: '微软雅黑';color: #333; font-size: 12px; }
+h1,h2,h3,h4,h5,h6,ol,ul,p,form{margin-top:0;margin-bottom:0}
+img{border:none;vertical-align:top;}
+ol,ul{padding-left:0;margin-left:0; }
+ul{list-style-type:none;}
+header,nav,section,article,footer,aside{display:block;margin:0;}
+a{color: #333;text-decoration:none; }
+
+/*定义滚动条*/
+::-webkit-scrollbar{width: 6px;height: 6px;}
+::-webkit-scrollbar-thumb{border-radius: 10px;background-color: rgba(0,0,0,0.2);}
+::-webkit-scrollbar-thumb:hover{border-radius: 10px;background-color: rgba(0,0,0,0.4);}
+
+
+/*公共*/
+/*三角形*/
+
+
+
+/*头*/
+header{position: relative; height: 72px;border-bottom: 1px solid #b3b3b3;background: #f3f3f3;}
+
+section{position: absolute;left: 0;width: 100%;top: 73px;bottom: 0;overflow: hidden;}
+
+
+.head_logo{float: left; margin-left: 5px; height: 32px;line-height: 32px;font-size: 14px;font-weight: bold;cursor: pointer;white-space:nowrap;  }
+.head_logo img{height: 22px; vertical-align: -6px;}
+
+
+.head_status{position: absolute;top: 0;right: 135px;}
+.head_status b{display: block;margin-top: 5px; line-height: 12px;text-indent: 15px;font-weight: normal; width: 12px;height: 12px;border-radius:12px;cursor: pointer;white-space:nowrap; }
+.head_status b:nth-child(1){background: #21ee1c; }
+.head_status b:nth-child(2){display: none; background: #bbbcbb; }
+.head_status b:nth-child(3){display: none; background: #f00404; }
+
+
+.head_win {position: absolute; display: inline-block; right: 0;top: 0; padding-left:4px; width: 92px;height: 22px;margin-right: 3px; background: url(image/head_win_bkg.png) no-repeat;}
+.head_win i{float: left;width: 26px;height: 22px;background: url(image/head_win.gif) no-repeat;cursor: pointer;}
+.head_win i.head_win_min{background-position:0 0;}
+.head_win i.head_win_nor{background-position:-26px 0;}
+.head_win i.head_win_clo{background-position:-52px 0;}
+
+
+
+.head_menu{float: left;clear:both;margin-top: 12px; padding-left: 5px; height: 29px;line-height: 29px;font-size: 14px;text-align: center;white-space:nowrap;font-weight: bold; }
+.head_menu li{display: inline-block; width: 107px; cursor:pointer; }
+.head_menu li.hot{background: url(image/head_menu_hot.png) no-repeat;}
+
+.head_msg {position: absolute;right: 5px;bottom: 5px;color: #989797; }
+.head_msg i{display: inline-block;width: 23px; margin-right:3px;height: 23px;vertical-align:-1px; background: url(image/head_msg.png) no-repeat; }
+.head_msg b{font-weight: normal;}
+.head_msg.hot{color: #333;}
+.head_msg.hot i{background-position: -23px 0;cursor:pointer;}
+.head_msg.hot b{color:#f00; cursor:pointer;}
+
+
+
+/************* 会话窗口*****************/
+.talks{/*-webkit-column-count:3; */display: table-row; }
+
+
+/*访客列表*/
+.talks_side{display:table-cell;  width: 300px; position: absolute;left: 5px;top: 5px;bottom: 5px;   border:1px solid #e4e3e3; border-radius:2px;line-height: 28px;}
+
+.talks_side h2{height: 28px;background: #ddd;border-bottom: 1px solid #b1b1b1;}
+.talks_side_scroll{position: absolute;left: 0;top: 29px;right: 0;bottom: 0; overflow-y:scroll;}
+.talks_side ul {display: table; border-collapse:collapse; width: 100%;background-color: #fff;background-image: linear-gradient(#f5f5f5 50%, transparent 50%, transparent);background-size: 56px 56px;   }
+.talks_side li {display: table-row;width: 100%; }
+.talks_side span{display: table-cell;border:none; white-space:nowrap; padding:0 3px;  } 
+.talks_side li:hover{background: #c8dffc; cursor:pointer; } 
+.talks_side li:nth-child(1) cite{ position: fixed;margin-top:-28px;font-style: normal;}
+.talks_side li:nth-child(1) i{display: block;margin:7px auto 0; }
+
+.talks_side i{display: inline-block;margin: 0 3px;  width: 12px;height: 12px;border-radius: 12px;font-style: normal;}
+.talks_side i.all {border:1px solid #999; background: #21ee1c;}
+.talks_side i.talking{background: #f00404;}
+.talks_side i.online {background: #21ee1c;}
+.talks_side i.offline{background: #bbbcbb;}
+
+.talks_side li:nth-child(1) i.talking,
+.talks_side li:nth-child(1) i.online,
+.talks_side li:nth-child(1) i.offline{display: none;}
+
+
+
+
+
+
+/*聊天交互窗口*/
+.talks_ctrl{position: absolute;left: 310px;top: 5px;right: 30%;padding-right: 10px; bottom: 5px; border: 1px solid #e4e3e3; border-radius:2px;}
+
+
+
+
+/*客户信息*/
+.talks_infor{position: absolute;width: 30%;top: 5px;bottom: 5px; right: 0px;border:1px solid #e4e3e3; border-radius:2px; }
+
+
+
+
+
+
+
+
+
+
+
+
