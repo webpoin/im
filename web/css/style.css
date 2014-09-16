@@ -1,24 +1,54 @@
-html{overflow: hidden;width: 100%;height: 100%;}
-body{background: #fff;padding-top: 50px;overflow: hidden;margin: 0;}
+html{width: 100%;height: 100%;}
+body{height: 100%;margin: 0; padding: 0;position: relative;font-family: '微软雅黑';}
+
+
+/*更改大小*/
+/*#resize{position: absolute;left: 0;top: 0;width: 100%;height: 100%;margin: -1px;}*/
+i,button{background-image: url(image/style.png);}
+
+#resize b{position: absolute;background: #aaa;width: 1px;height: 1px;font-size: 0;line-height: 0;overflow: hidden;}
+#resize .t{width: 100%;top: 0;left: 0;cursor: n-resize;}
+#resize .r{height: 500%;top: 0;right: 0;cursor: e-resize;}
+#resize .b{width: 500%;bottom: 0;left: 0;cursor: s-resize;}
+#resize .l{height: 100%;top: 0;left: 0;cursor: w-resize;}
+#resize .lt{top: 0;left: 0;cursor: nw-resize;}
+#resize .tr{top: 0;right: 0;cursor: ne-resize;}
+#resize .rb{bottom: 0;right: 0;cursor: se-resize;}
+#resize .bl{bottom: 0;left: 0;cursor: sw-resize;}
+
 
 /*客户信息*/
-#infor{position: absolute;top: 0;left: 0;height: 54px;width: 100%; border-bottom:1px solid #c9cbca;overflow: hidden;background: url(image/style.png) repeat-x 0 -5px;}
+#header{position: absolute;top: 0px;left: 0px;height: 54px;width: 100%;line-height: 20px; border-bottom:1px solid #c9cbca;overflow: hidden;cursor: default;  -webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;-o-user-select: none;user-select: none;
+	background: linear-gradient(#e6e6e6,#cdcdcd);
+	background: -webkit-linear-gradient(#e6e6e6,#cdcdcd);
+	background: -moz-linear-gradient(#e6e6e6,#cdcdcd);
+	background: -ms-linear-gradient(#e6e6e6,#cdcdcd);
+	background: -o-linear-gradient(#e6e6e6,#cdcdcd);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffe6e6e6,endColorstr=#ffcdcdcd);
+}
+#header img{float: left; width: 40px;height: 40px;margin:7px; border-radius: 5px;border: 1px solid #ccc; }
+#header a{display: block;margin-top: 9px;font-size: 14px;color: #555;white-space: nowrap;}
+#header b{display: block;font-weight: normal; font-size: 12px;white-space: nowrap;color: #777;white-space: nowrap;}
+
+
+/*视窗*/
+#view{position: absolute;right: 2px;top: 0;}
+#view i{position: relative;float: left; width: 18px;height: 18px;margin-right: 3px;cursor: pointer;}
+#view i.minimize{background-position: 0 0; }
+#view i.original{background-position: -18px 0;}
+#view i.maximize{background-position: -36px 0;}
+#view i.closed{background-position: -54px 0;}
+#view i.minimize:hover{background-position: 0 -18px; }
+#view i.original:hover{background-position: -18px -18px;}
+#view i.maximize:hover{background-position: -36px -18px;}
+#view i.closed:hover{background-position: -54px -18px;}
 
 
 /*聊天窗*/
+#chart{position: absolute;top: 55px;left: 0; bottom: 118px;width: 100%;overflow-y:scroll;overflow-x: hidden;
+background: #f2f4f5;}
 
-.chart_box{position: absolute;top: 55px;left: 0; bottom: 118px;/*width: 100%;*/width: 550px; overflow-y:scroll;overflow-x: hidden;
-background: #f2f4f5;
-background: -webkit-gradient(linear,left top,left bottom,from(#fafbfb),to(#f2f4f5));
-background: -webkit-linear-gradient(#fafbfb,#f2f4f5);
-background: -moz-linear-gradient(#fafbfb,#f2f4f5);
-background: -ms-linear-gradient(#fafbfb,#f2f4f5);
-background: -o-linear-gradient(#fafbfb,#f2f4f5);
--pie-background:linear-gradient(#fafbfb,#f2f4f5);
-background: linear-gradient(#fafbfb,#f2f4f5);
-_height:407px;_bottom:auto;}
-
-#chart{position: relative;}
+/*#chart{position: relative;}*/
 
 
 
@@ -35,7 +65,7 @@ _position: relative;_margin: 0 5px;_top:445px;_left:0;
 
 /*聊天工具*/
 #tools	{position: absolute;width: 100%; height: 18px;padding: 8px 10px 0; border-top:1px solid #fff;bottom: 90px;}
-#tools button {float: left;border:none;margin-right: 9px; outline:none;width: 18px;height: 18px;background-image: url(image/style.png) ;background-color:#f8f8f8; cursor:pointer;  }
+#tools button {float: left;border:none;margin-right: 9px; outline:none;width: 18px;height: 18px;background-color:#f8f8f8; cursor:pointer;  }
 #tools_face	{background-position: 0 -72px;}
 #tools_cut	{background-position: -18px -72px;}
 #tools_pop	{background-position: -36px -72px;}
@@ -55,16 +85,18 @@ _position: relative;_margin: 0 5px;_top:445px;_left:0;
 
 
 
+
+#chart{font-size: 12px;}
 /*客服聊天记录*/
 .server{clear:both;position: relative; text-align: left;margin:10px 40px 10px 20px; }
-.server i{position: absolute;left: -7px;top: 0px;width:17px;height:9px;overflow: hidden; background: url(image/style.png) 0 -234px;  }
+.server i{position: absolute;left: -7px;top: 0px;width:17px;height:9px;overflow: hidden; background-position: 0 -234px;  }
 
 .server div{
 position: relative;
 display: inline-block;
 *display: inline;
 *zoom:1;
-padding: 10px 15px;
+padding: 5px;
 min-height: 16px;
 word-break: break-all;
 line-height: 1.4; 
@@ -89,10 +121,10 @@ behavior:url(PIE.htc);
 
 
 /*用户聊天记录*/
-.user{position: relative;margin:10px 20px 10px 40px;text-align: right;clear:both;  }
+.customer{position: relative;margin:10px 20px 10px 40px;text-align: right;clear:both;  }
 
-.user i{position: absolute;right: -6px;_right:10px; top: 0px;width:11px;height:9px;overflow: hidden; background: url(image/style.png) -24px -234px;}
-.user div{
+.customer i{position: absolute;right: -6px;_right:10px; top: 0px;width:11px;height:9px;overflow: hidden; background-position: -24px -234px;}
+.customer div{
 text-align: left;
 position: relative;
 display: inline-block;
@@ -118,3 +150,14 @@ border: 1px solid #b9bec5;
 box-shadow: 0px 1px 1px #d6dadb;
 behavior:url(PIE.htc);
 } 
+
+
+
+/*不同状态*/
+body.minimize .minimize{display: none;}
+body.original .original{display: none;}
+body.maximize .maximize{display: none;}
+
+body.minimize #header{}
+
+
