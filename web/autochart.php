@@ -38,7 +38,7 @@
 
 	}else{
 		// $res['type'] = 'msg';
-		$res['type'] = 'emp';
+		$res['type'] = 'server';
 		$res['value'] = 'server返回'.$_GET["msg"];
 	}
 

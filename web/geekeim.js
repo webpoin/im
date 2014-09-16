@@ -143,8 +143,8 @@ var test = document.createElement('div');
 		doc.close();
 
 
-		var eventSubmit = function(e){}
-		var eventKeypress = function(){}
+		// 提交事件
+		var commit = function(val){}
 
 		// 设置窗口状态
 		var setStatus = (function (sta) {
@@ -170,7 +170,6 @@ var test = document.createElement('div');
 
 			return arguments.callee;
 		})(config.status);
-
 
 		// 编辑器插入
 		var insertEnter = (function(win,doc){
@@ -216,7 +215,6 @@ var test = document.createElement('div');
 					range.setStartAfter(hasR_lastChild)
 				}
 			}
-		
 		})(win,doc);
 
 		// 添加聊天内容
@@ -290,7 +288,6 @@ var test = document.createElement('div');
 				doc.onmousemove = doc.onmouseup = win.onblur = origin = margin = status =null;
 			}
 		}
-
 
 		// 改变大小
 		doc.getElementById('resize').onmousedown = function(e){
@@ -381,20 +378,11 @@ var test = document.createElement('div');
 		// enter 发送消息// 回车的浏览器兼容问题～～杀很大
 		doc.getElementById('enter').onkeypress = function(e) {
 			e = e || win.event;
+			var val;
 
-			// 键盘事件
-			eventKeypress(e);
+			if ( (e.keyCode==13||e.keyCode==10) && (val = this.innerHTML)){
 
-			if ( (e.keyCode==13||e.keyCode==10) ){
-		
-				var val  =  this.innerHTML;
-				if(!val) return ;
-
-				// 插入
-				insertChart({type:'customer',value:val});
-				// 提交事件
-				eventSubmit(val);
-
+				commit(val);
 				this.innerHTML = '';
 				return false;
 			}
@@ -428,28 +416,26 @@ var test = document.createElement('div');
 			doc.getElementById('tools_face_cnt').style.display = 'none';
 		}
 
-
-
-
 	
 		dom.style.display = 'block';
 		return {
 			dom:dom,
 			win:win,
 			doc:doc,
+			commit:function(fuc){if( fuc && typeof(fuc) === 'function') commit = fuc;},
 			insertEnter:insertEnter,
-			insertChart:insertChart,
-			eventSubmit:eventSubmit,
-			eventKeypress:eventKeypress
+			insertChart:insertChart
+			
 		}
 	})(window,document,config);
+
+	
 
 
 	// 消息处理器
 	var massage = (function(document,box,config){
 
 		// 待发送内容
-		var pending = [];
 		var speed = 1000; //间隔时间
 		var interval;
 		var loop = [];
@@ -468,54 +454,38 @@ var test = document.createElement('div');
 				script = document.createElement('script');
 				script.src = url +(new Date()).getTime()+loop.join('');
 				body.appendChild(script);
+				loop.length = 0;
 			}
 		})(document,config);
 
 
+		box.commit(function(val){
+			loop.push('&msg=' + val);
+			box.insertChart({
+				type:'customer',
+				value:val,
+				time:(new Date).getTime()
+			});
+		});
 
-		// 内容格式化并压入chart
-		var format = function(json){
 
-			// 解压缩
-			json.value = json.value.replace(/\[\/n\]/gi,'<br/>');
-			json.value = json.value.replace(/\[\/p:(\d+?)\]/gi,'<img src="images/$1.gif"/>');
+		window[config.name] = function(json){
+			// 非空
+			if(!json || !json.type || json.type === 'emp') return ;
 
-			json.time = json.time || (new Date).getTime();
-
-			// 把压缩的数据解析
-			box.insertChart(json);
-			// return msg;
+			box.insertChart({
+				type:json.type,
+				value:json.value,
+				time:json.time || (new Date).getTime()
+			});
+			
 		}
-
-
-
-
 
 
 		// 轮询
 		interval = setInterval(poll,speed);
 
 		return {
-			chart:function(json){
-				format(json);
-			},
-			send: function(msg) {
-				var res = msg;
-
-
-				// 输入的内容格式化
-				res = res.replace(/^<p>/i,'');
-				res = res.replace(/((?:<div>|<p>)(?:<br>|\s)?|<br>)/gi,'[/n]'); //修改换行为/n
-
-				// res = res.replace(/<br>/gi,'<br>'); //修改换行为/n
-				res = res.replace(/<img.+?(\d+).gif">/gi,'[/p:$1]');
-				res = res.replace(/<\/?.+?>/g,''); //去除<*>标签
-
-				
-				loop.push('&msg=' + res);
-				format({type:'user',cont:res});
-
-			},
 			stop: function() {
 				clearInterval(interval);
 				interval = false;
@@ -533,18 +503,7 @@ var test = document.createElement('div');
 
 
 
-	window[config.name] = function(json){
-		// console.log(json);
-		// 返回空
-		if(json && json.type && json.type!=='emp'){
-			massage.chart(json);
-			// chart.insert(msg.format(json.cont),'server');
-		}
-
-		// if(json.type === 'msg'){
-			
-		// }
-	}
+	
 
 
 
