@@ -7,7 +7,6 @@
 	// 返回json 或者callback格式
 	
 
-	// $rand = rand(0, 15);
 	function random_str(){
 	    //生成一个包含 大写英文字母, 小写英文字母, 数字 的数组
 	    $arr = array_merge(range(0, 9), range('a', 'z'), range('A', 'Z'));

@@ -6,7 +6,9 @@ var test = document.createElement('div');
 (function(window, document, undefined){
 
 
-	// 根据js的url解析配置信息
+
+
+	// 根据url解析配置信息 
 	var config = (function(document) {
 
 		// javascript url
@@ -87,15 +89,12 @@ var test = document.createElement('div');
 	}(document));
 	
 
-	
-
 	// 创建窗口文档与交互
 	var box = (function(window,document, config) {
 
 		// 创建document
 		var head = [],
 			body = [],
-			status = config[config.status],
 			html = '<!DOCTYPE HTML><html><head>%head</head><body style="background-color:transparent">%body</body></html>',
 			dom = document.createElement('iframe'),
 			win, doc;
@@ -146,18 +145,17 @@ var test = document.createElement('div');
 		// 提交事件
 		var commit = function(val){}
 
-		// 设置窗口状态
-		var setStatus = (function (sta) {
-
-			var status = config[sta];
-			if(!status) return;
+		// 设置|获取 窗口状态
+		var status = function (sta) {
+			
+			if(!sta) return config.status;
 
 			config.status = sta;
 			doc.body.className = sta;
 
-		
-			var style = status.position.concat(status.size);
-			var name  = ['top','right','bottom','left','width','height'];
+			var status = config[sta],
+				style = status.position.concat(status.size),
+				name  = ['top','right','bottom','left','width','height'];
 
 			// 定位 和大小
 			for(var i=0,x;i<6;i++){
@@ -167,9 +165,7 @@ var test = document.createElement('div');
 
 			// 边距
 			dom.style.margin = status.margin.join('px ')+ 'px';
-
-			return arguments.callee;
-		})(config.status);
+		}
 
 		// 编辑器插入
 		var insertEnter = (function(win,doc){
@@ -370,7 +366,7 @@ var test = document.createElement('div');
 			var target = e.target || e.srcElement;
 			var name = target.className;
 
-			target.tagName.toLowerCase() === 'i' && name !== config.status && setStatus(name);
+			target.tagName.toLowerCase() === 'i' && name !== config.status && status(name);
 
 			return false;
 		}
@@ -417,15 +413,17 @@ var test = document.createElement('div');
 		}
 
 	
-		dom.style.display = 'block';
+		// dom.style.display = 'block';
 		return {
 			dom:dom,
 			win:win,
 			doc:doc,
-			commit:function(fuc){if( fuc && typeof(fuc) === 'function') commit = fuc;},
+			status:status,
 			insertEnter:insertEnter,
-			insertChart:insertChart
-			
+			insertChart:insertChart,
+			hide:function(){dom.style.display = 'none';},
+			show:function(){dom.style.display = 'block';},
+			commit:function(fuc){if( fuc && typeof(fuc) === 'function') commit = fuc;},
 		}
 	})(window,document,config);
 
@@ -435,10 +433,10 @@ var test = document.createElement('div');
 	// 消息处理器
 	var massage = (function(document,box,config){
 
-		// 待发送内容
-		var speed = 1000; //间隔时间
-		var interval;
-		var loop = [];
+		
+		var speed = 1000, //间隔时间
+			interval = false,
+			loop = [];
 
 
 		// 轮询
@@ -468,7 +466,7 @@ var test = document.createElement('div');
 			});
 		});
 
-
+		// 聊天事件（唯一一个接口）
 		window[config.name] = function(json){
 			// 非空
 			if(!json || !json.type || json.type === 'emp') return ;
@@ -477,28 +475,88 @@ var test = document.createElement('div');
 				type:json.type,
 				value:json.value,
 				time:json.time || (new Date).getTime()
-			});
-			
+			});	
 		}
 
 
-		// 轮询
-		interval = setInterval(poll,speed);
-
 		return {
 			stop: function() {
-				clearInterval(interval);
-				interval = false;
+				interval = clearInterval(interval) && false;
 			},
 			start: function() {
-				if (!interval) {
-					interval = setInterval(poll, speed);
-				}
+				interval = interval || setInterval(poll, speed);
 			}
 		}
 	})(document,box,config);
 
 	
+
+
+	// 本地存储
+	var localdata = (function(window,document) {
+		
+		var data,usedata,stor,res={},name = window.location.hostname;
+
+
+		if (window.localStorage) {
+
+			stor = window.localStorage;
+			res.set = function(key, val) {
+				stor.setItem(key, val);
+			}
+			res.get = function(key) {
+				return stor.getItem(key) || '';
+			}
+			res.remove = function(key) {
+				stor.removeItem(key);
+			}
+		} else {
+
+			usedata = (function(){
+				data = document.createElement('span');
+				data.style.cssText = 'position:absolute;top:-1000em;behavior:url("#default#userData")';
+				document.body.appendChild(data);
+				data.load(name);
+				return arguments.callee;
+			})();
+
+			res.set = function(key, val) {
+				data.parentNode.removeChild(data);
+				usedata();
+				data.setAttribute(key, val);
+				data.save(name);
+			}
+
+			res.get = function(key) {
+				data.parentNode.removeChild(data);
+				usedata();
+				return data.getAttribute(key) || '';
+			}
+			res.remove = function(key) {
+				data.removeAttribute(key);
+				data.save(name);
+			}
+		}
+
+		return res;
+	})(window,document);
+
+
+	
+
+
+
+
+
+
+	
+	box.status('original');
+	box.show();
+
+	localdata.set('fuck','day');
+	console.log(localdata.get('fuck'));
+
+
 
 
 
