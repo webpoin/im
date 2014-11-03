@@ -45,10 +45,16 @@ var test = document.createElement('div');
 			return scripts[scripts.length-1].src;
 		})(document);
 
-		// console.log(host)
 
 		//域名
 		var domain =  host.match(/^https?:\/\/(?:(?:[0-9]{1,3}\.){3}[0-9]{1,3}|(?:[0-9a-z_!~*'()@-]+\.)*\w*)/)[0] || '';
+
+
+		// domain 本地测试开发
+			domain = domain+'/im/web/'
+
+
+
 
 		return {
 			name:'geekeim',		//接口名称，做为接收数据，函数名
@@ -73,7 +79,7 @@ var test = document.createElement('div');
 			},
 			original:{
 				size:[300,370],
-				position:['30%','40%',0,null],
+				position:[null,'40%','30%',null],
 				margin:[0,0,0,0],
 				removable:true,
 				resizable:true
@@ -168,7 +174,9 @@ var test = document.createElement('div');
 			dom.style.margin = status.margin.join('px ')+ 'px';
 		}
 
-		// 编辑器插入
+
+
+		// 编辑器插入 insertEnter(html)
 		var insertEnter = (function(win,doc){
 
 			var enter = doc.getElementById('enter');
@@ -214,7 +222,9 @@ var test = document.createElement('div');
 			}
 		})(win,doc);
 
-		// 添加聊天内容
+
+
+		// 添加聊天内容 insertChart({type:'classname',value:'massages value'})
 		var insertChart = (function (doc) {
 
 			var chart = doc.getElementById('chart');
@@ -232,6 +242,45 @@ var test = document.createElement('div');
 			}	
 		})(doc);
 
+
+		// 抖动
+		var shanke = (function(dom){
+
+			var time = 0;
+			var timeout =  3000 ;//抖动时间间隔
+
+			return function(){
+				var newtime = (new Date()).getTime();
+
+				if(  newtime - time > timeout){
+
+					time = newtime;
+
+					var c,s,i=0,
+					m = config[config.status].margin,
+					t = m.slice(0),
+					interval = setInterval(function(){
+						c = i%2;
+						s = (i++)%4 <2 ? 0:4;
+
+						t[c] = m[c] -s;
+						t[c+2] = m[c+2] +s;
+
+						dom.style.margin = t.join('px ') + 'px';
+
+						if(i>17){
+							clearInterval(interval);
+							i=0;
+						}
+
+					},20);
+
+
+				}else{
+					insertChart({type:'system',value:'您抖动太频繁，请稍后再试'})
+				}
+			}
+		})(dom);
 
 
 		// 移动
@@ -406,6 +455,18 @@ var test = document.createElement('div');
 			e = e || win.event;
 			var tar = e.target || e.srcElement;
 			tar.tagName.toLowerCase() === 'img' && tar.src && insertEnter('<img src="'+tar.src+'" />');
+		}
+
+		// 抖动
+		doc.getElementById('tools_pop').onclick = shanke;
+
+
+
+		// 上传图片
+		doc.getElementById('tools_pic').onclick = function(e){
+			e = e || win.event;
+
+
 		}
 
 		// 总代理
@@ -728,7 +789,7 @@ var test = document.createElement('div');
 
 
 
-	massage.start();
+	// massage.start();
 	box.status('original');
 	box.show();
 
