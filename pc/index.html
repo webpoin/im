@@ -11,20 +11,20 @@
 	
 	<header>
 
-		<a class="head_logo" href=""><img src="images/head_logo.ico">即刻沟通</a>
+		<a class="head_logo" href="#" target="_blank" onclick="if(window.test){return false;}window.test=true;"><img src="images/head_logo.ico">即刻沟通</a>
 
 		<!-- 客户状态 -->
 		<div class="head_status">
-			<b class="head_status_online" title="在线">在线</b>
-			<b class="head_status_offline" title="离线">离线</b>
-			<b class="head_status_busy" title="正忙">正忙</b>
+			<i class="onl" title="在线">在线</i>
+			<i class="off" title="离线">离线</i>
+			<i class="tlk" title="正忙">正忙</i>
 		</div>
 
 		<!-- 窗口控制 -->
 		<div class="head_win">
-			<i class="head_win_min"></i>
-			<i class="head_win_nor"></i>
-			<i class="head_win_clo"></i>
+			<i class="min"></i>
+			<i class="nor"></i>
+			<i class="cls"></i>
 		</div>
 
 		<ul class="head_menu">
@@ -42,289 +42,450 @@
 	<section class="talks">
 
 		<div class="talks_side">
-			<h2></h2>
-			<div class="talks_side_scroll">
+			<h2>	
+				<i class="all" title="全部访客"></i>
+				<b>时间</b>
+				<b>来源</b>
+				<b>位置</b>
+				<s>	
+					<i class="tlk" title="正在交谈的访客"></i>
+					<i class="onl" title="正在浏览网页的访客"></i>
+					<i class="off" title="已经下线的访客"></i>	
+				</s>
+			</h2>
+			<h6>在线人数：120；未沟通：10；已沟通：58；</h6>
+			<ul>
+				<li>
+					<i class="onl"></i>
+					<b>08:30’56”</b>
+					<b>百度搜索</b>
+					<b>广东深圳龙华广东深圳龙华广东深圳龙华</b>
+				</li>
+				<li>
+					<i class="onl"></i>
+					<b>23:30’12”</b>
+					<b>直接输入</b>
+					<b>北京西城区六里桥</b>
+				</li>
+				<li>
+					<i class="onl"></i>
+					<b>06:01’30”</b>
+					<b>google搜索</b>
+					<b>海外用户</b>
+				</li>
+				<li>
+					<i class="onl"></i>
+					<b>08:30’56”</b>
+					<b>百度搜索</b>
+					<b>广东深圳龙华</b>
+				</li>
+				<li>
+					<i class="onl"></i>
+					<b>23:30’12”</b>
+					<b>直接输入</b>
+					<b>北京西城区六里桥</b>
+				</li>
+				<li>
+					<i class="onl"></i>
+					<b>06:01’30”</b>
+					<b>google搜索</b>
+					<b>海外用户</b>
+				</li>
+				<li>
+					<i class="onl"></i>
+					<b>08:30’56”</b>
+					<b>百度搜索</b>
+					<b>广东深圳龙华</b>
+				</li>
+				<li>
+					<i class="onl"></i>
+					<b>23:30’12”</b>
+					<b>直接输入</b>
+					<b>北京西城区六里桥</b>
+				</li>
+				<li>
+					<i class="onl"></i>
+					<b>06:01’30”</b>
+					<b>google搜索</b>
+					<b>海外用户</b>
+				</li>
+				<li>
+					<i class="onl"></i>
+					<b>08:30’56”</b>
+					<b>百度搜索</b>
+					<b>广东深圳龙华</b>
+				</li>
+				<li>
+					<i class="onl"></i>
+					<b>23:30’12”</b>
+					<b>直接输入</b>
+					<b>北京西城区六里桥</b>
+				</li>
+
+
+				<li>
+					<i class="tlk"></i>
+					<b>06:01’30”</b>
+					<b>google搜索</b>
+					<b>海外用户</b>
+				</li>
+				<li>
+					<i class="tlk"></i>
+					<b>08:30’56”</b>
+					<b>百度搜索</b>
+					<b>广东深圳龙华</b>
+				</li>
+				<li>
+					<i class="tlk"></i>
+					<b>23:30’12”</b>
+					<b>直接输入</b>
+					<b>北京西城区六里桥</b>
+				</li>
+				<li>
+					<i class="tlk"></i>
+					<b>06:01’30”</b>
+					<b>google搜索</b>
+					<b>海外用户</b>
+				</li>
+
+				<li>
+					<i class="off"></i>
+					<b>08:30’56”</b>
+					<b>百度搜索</b>
+					<b>广东深圳龙华</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>23:30’12”</b>
+					<b>直接输入</b>
+					<b>北京西城区六里桥</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>06:01’30”</b>
+					<b>google搜索</b>
+					<b>海外用户</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>08:30’56”</b>
+					<b>百度搜索</b>
+					<b>广东深圳龙华</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>23:30’12”</b>
+					<b>直接输入</b>
+					<b>北京西城区六里桥</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>06:01’30”</b>
+					<b>google搜索</b>
+					<b>海外用户</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>08:30’56”</b>
+					<b>百度搜索</b>
+					<b>广东深圳龙华</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>23:30’12”</b>
+					<b>直接输入</b>
+					<b>北京西城区六里桥</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>06:01’30”</b>
+					<b>google搜索</b>
+					<b>海外用户</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>08:30’56”</b>
+					<b>百度搜索</b>
+					<b>广东深圳龙华</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>23:30’12”</b>
+					<b>直接输入</b>
+					<b>北京西城区六里桥</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>06:01’30”</b>
+					<b>google搜索</b>
+					<b>海外用户</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>08:30’56”</b>
+					<b>百度搜索</b>
+					<b>广东深圳龙华</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>23:30’12”</b>
+					<b>直接输入</b>
+					<b>北京西城区六里桥</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>06:01’30”</b>
+					<b>google搜索</b>
+					<b>海外用户</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>08:30’56”</b>
+					<b>百度搜索</b>
+					<b>广东深圳龙华</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>23:30’12”</b>
+					<b>直接输入</b>
+					<b>北京西城区六里桥</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>06:01’30”</b>
+					<b>google搜索</b>
+					<b>海外用户</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>08:30’56”</b>
+					<b>百度搜索</b>
+					<b>广东深圳龙华</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>23:30’12”</b>
+					<b>直接输入</b>
+					<b>北京西城区六里桥</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>06:01’30”</b>
+					<b>google搜索</b>
+					<b>海外用户</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>08:30’56”</b>
+					<b>百度搜索</b>
+					<b>广东深圳龙华</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>23:30’12”</b>
+					<b>直接输入</b>
+					<b>北京西城区六里桥</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>06:01’30”</b>
+					<b>google搜索</b>
+					<b>海外用户</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>08:30’56”</b>
+					<b>百度搜索</b>
+					<b>广东深圳龙华</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>23:30’12”</b>
+					<b>直接输入</b>
+					<b>北京西城区六里桥</b>
+				</li>
+				<li>
+					<i class="off"></i>
+					<b>06:01’30”</b>
+					<b>google搜索</b>
+					<b>海外用户</b>
+				</li>
+			</ul>
+		</div>
+
+		<div style="display:flex;flex-grow:1;flex-direction:column;margin:5px 0;">
+			<div class="talls_webim">清空按钮</div>
+			<div class="talks_reply">
+				<h2>
+					<b class="hot">技术问答</b>
+					<b>售后问题</b>
+					<b>售前咨询</b>
+					<b>文档文件</b>
+					<b>其他分类</b>
+					<i>+</i>
+				</h2>
 				<ul>
-					<li>
-						<span><cite>
-							<i class="all" title="全部访客"></i>
-							<i class="talking" title="正在交谈的访客"></i>
-							<i class="online" title="正在浏览网页的访客"></i>
-							<i class="offline" title="已经下线的访客"></i>	
-						</cite></span>
-						<span><cite>位置</cite></span>
-						<span><cite>来源</cite></span>
-						<span><cite>时间</cite></span>
-					</li>
-					<li>
-						<span><i class="online"></i></span>
-						<span>广东深圳龙华</span>
-						<span>百度搜索</span>
-						<span>08:30’56”</span>
-					</li>
-					<li>
-						<span><i class="online"></i></span>
-						<span>北京西城区六里桥</span>
-						<span>直接输入</span>
-						<span>23:30’12”</span>
-					</li>
-					<li>
-						<span><i class="online"></i></span>
-						<span>海外用户</span>
-						<span>google搜索</span>
-						<span>06:01’30”</span>
-					</li>
-					<li>
-						<span><i class="online"></i></span>
-						<span>广东深圳龙华</span>
-						<span>百度搜索</span>
-						<span>08:30’56”</span>
-					</li>
-					<li>
-						<span><i class="online"></i></span>
-						<span>北京西城区六里桥</span>
-						<span>直接输入</span>
-						<span>23:30’12”</span>
-					</li>
-					<li>
-						<span><i class="online"></i></span>
-						<span>海外用户</span>
-						<span>google搜索</span>
-						<span>06:01’30”</span>
-					</li>
-					<li>
-						<span><i class="online"></i></span>
-						<span>广东深圳龙华</span>
-						<span>百度搜索</span>
-						<span>08:30’56”</span>
-					</li>
-					<li>
-						<span><i class="online"></i></span>
-						<span>北京西城区六里桥</span>
-						<span>直接输入</span>
-						<span>23:30’12”</span>
-					</li>
-					<li>
-						<span><i class="online"></i></span>
-						<span>海外用户</span>
-						<span>google搜索</span>
-						<span>06:01’30”</span>
-					</li>
-					<li>
-						<span><i class="online"></i></span>
-						<span>广东深圳龙华</span>
-						<span>百度搜索</span>
-						<span>08:30’56”</span>
-					</li>
-					<li>
-						<span><i class="online"></i></span>
-						<span>北京西城区六里桥</span>
-						<span>直接输入</span>
-						<span>23:30’12”</span>
-					</li>
-
-
-					<li>
-						<span><i class="talking"></i></span>
-						<span>海外用户</span>
-						<span>google搜索</span>
-						<span>06:01’30”</span>
-					</li>
-					<li>
-						<span><i class="talking"></i></span>
-						<span>广东深圳龙华</span>
-						<span>百度搜索</span>
-						<span>08:30’56”</span>
-					</li>
-					<li>
-						<span><i class="talking"></i></span>
-						<span>北京西城区六里桥</span>
-						<span>直接输入</span>
-						<span>23:30’12”</span>
-					</li>
-					<li>
-						<span><i class="talking"></i></span>
-						<span>海外用户</span>
-						<span>google搜索</span>
-						<span>06:01’30”</span>
-					</li>
-
-					<li>
-						<span><i class="offline"></i></span>
-						<span>广东深圳龙华</span>
-						<span>百度搜索</span>
-						<span>08:30’56”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>北京西城区六里桥</span>
-						<span>直接输入</span>
-						<span>23:30’12”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>海外用户</span>
-						<span>google搜索</span>
-						<span>06:01’30”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>广东深圳龙华</span>
-						<span>百度搜索</span>
-						<span>08:30’56”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>北京西城区六里桥</span>
-						<span>直接输入</span>
-						<span>23:30’12”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>海外用户</span>
-						<span>google搜索</span>
-						<span>06:01’30”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>广东深圳龙华</span>
-						<span>百度搜索</span>
-						<span>08:30’56”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>北京西城区六里桥</span>
-						<span>直接输入</span>
-						<span>23:30’12”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>海外用户</span>
-						<span>google搜索</span>
-						<span>06:01’30”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>广东深圳龙华</span>
-						<span>百度搜索</span>
-						<span>08:30’56”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>北京西城区六里桥</span>
-						<span>直接输入</span>
-						<span>23:30’12”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>海外用户</span>
-						<span>google搜索</span>
-						<span>06:01’30”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>广东深圳龙华</span>
-						<span>百度搜索</span>
-						<span>08:30’56”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>北京西城区六里桥</span>
-						<span>直接输入</span>
-						<span>23:30’12”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>海外用户</span>
-						<span>google搜索</span>
-						<span>06:01’30”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>广东深圳龙华</span>
-						<span>百度搜索</span>
-						<span>08:30’56”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>北京西城区六里桥</span>
-						<span>直接输入</span>
-						<span>23:30’12”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>海外用户</span>
-						<span>google搜索</span>
-						<span>06:01’30”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>广东深圳龙华</span>
-						<span>百度搜索</span>
-						<span>08:30’56”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>北京西城区六里桥</span>
-						<span>直接输入</span>
-						<span>23:30’12”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>海外用户</span>
-						<span>google搜索</span>
-						<span>06:01’30”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>广东深圳龙华</span>
-						<span>百度搜索</span>
-						<span>08:30’56”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>北京西城区六里桥</span>
-						<span>直接输入</span>
-						<span>23:30’12”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>海外用户</span>
-						<span>google搜索</span>
-						<span>06:01’30”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>广东深圳龙华</span>
-						<span>百度搜索</span>
-						<span>08:30’56”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>北京西城区六里桥</span>
-						<span>直接输入</span>
-						<span>23:30’12”</span>
-					</li>
-					<li>
-						<span><i class="offline"></i></span>
-						<span>海外用户</span>
-						<span>google搜索</span>
-						<span>06:01’30”</span>
-					</li>
-
+					<li>实例 2使用公式 (an + b)。描述：表示周期的长度，n 是计数器（从 0 开始）<i>◆</i></li>
+					<li>实例 2使用公式 (an + b)。描述：表示周期的长度，n 是计数器（从 0 开始）<i>◆</i></li>
+					<li>实例 2使用公式 (an + b)。描述：表示周期的长度，n 是计数器（从 0 开始）<i>◆</i></li>
+					<li>实例 2使用公式 (an + b)。描述：表示周期的长度，n 是计数器（从 0 开始）<i>◆</i></li>
+					<li>实例 2使用公式 (an + b)。描述：表示周期的长度，n 是计数器（从 0 开始）<i>◆</i></li>
+					<li>实例 2使用公式 (an + b)。描述：表示周期的长度，n 是计数器（从 0 开始）<i>◆</i></li>
+					<li>实例 2使用公式 (an + b)。描述：表示周期的长度，n 是计数器（从 0 开始）<i>◆</i></li>
+					<li>实例 2使用公式 (an + b)。描述：表示周期的长度，n 是计数器（从 0 开始）<i>◆</i></li>
 				</ul>
+
 			</div>
+		
 		</div>
 
-		<div class="talks_ctrl">
+
+		<div style="display:flex;flex-direction:column;">
+			<div class="talks_infor">
+				<h2>
+					<b class="hot">访问轨迹</b>
+					<b>消息记录</b>
+					<b>客户资料</b>
+					<b>访问记录</b>
+					<!-- 访问记录可以分天隔行 -->
+				</h2>
+				<div class="talks_locus">
+					<h3><b>时间</b><b>页面</b><b>时长</b></h3>
+					<ul>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+						<li>
+							<b>08:30’56”</b>
+							<a href="#">自适应网页设计（Responsive Web Design）</a>
+							<b>05'28"</b>
+						</li>
+					</ul>
+					<h6>访客来源：百度搜索；关键字：你好MT</h6>
+
+				</div>
+
+
+			</div>
+
+			<form class="talks_recode">
+				<input type="text" name="" placeholder="客户姓名"><br>
+				<input type="text" name="" placeholder="联系方式"><br>
+				<textarea name=""  placeholder="备注信息"  rows="3"></textarea>
+			</form>
 			
-		fuck
-
-		</div>
-
-
-		<div class="talks_infor">
-			your
 		</div>
 
 	</section>
