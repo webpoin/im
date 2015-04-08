@@ -37,6 +37,12 @@ i{display: inline-block;font-family: iconfont;font-style: normal;}
 .auth a{display: inline-block;margin-top: 9px;font-size: 14px;color: #555;white-space: nowrap;}
 .auth i{margin-left: 3px;font-size: 14px;font-weight: normal;color: #888;cursor: pointer;}
 .auth b{display: block;font-weight: normal; font-size: 12px;white-space: nowrap;color: #777;white-space: nowrap;}
+#auths_cnt{display: none; position: absolute;line-height: 24px;border-radius: 3px; left: 100%;margin-left: -22px;z-index: 1;top: 32px;background: #fff;padding: 6px 0;box-shadow: 1px 1px 2px rgba(0,0,0,0.2);}
+#auths_cnt:before{content: '';position: absolute;left: 10px;top: -5px;border-style: solid;border-width: 0 5px 5px;border-color: transparent transparent #fff;}
+#auths_cnt p{overflow: hidden;font-size: 12px;line-height: 24px;margin: 0;cursor: pointer;padding: 0 6px;}
+#auths_cnt p img{float: none;vertical-align: middle;width: 14px;height: 14px;margin: 0 3px 0 0;}
+#auths_cnt p:hover{background: #f1f1f1;}
+
 
 
 /*视窗*/
@@ -124,14 +130,17 @@ user-select:none;}
 
 
 /*客服聊天记录*/
-.server{clear:both;position: relative; text-align: left;margin:10px 40px 10px 20px; }
-.server i{position: absolute;left: -7px;top: 0px;width:17px;height:9px;overflow: hidden; background-position: 0 -234px;  }
+.server{clear:both;position: relative; text-align: left;margin:10px; }
 
-.server div{
+.server div.cnt:before{content: ''; position: absolute;left: -9px; top: 4px;width:0px;height:0px;overflow: hidden;border-style:solid;border-color: #a9c1dc transparent transparent ;border-width:9px 0 0 9px;}
+.server div.cnt:after{content: ''; position: absolute;left: -7px; top: 5px;width:0px;height:0px;overflow: hidden;border-style:solid;border-color:  #ebf4fd transparent transparent;border-width:9px 0 0 9px;}
+
+.server div.cnt{
 position: relative;
 display: inline-block;
 *display: inline;
 *zoom:1;
+margin-left: 40px;
 padding: 5px;
 min-height: 16px;
 word-break: break-all;
@@ -151,18 +160,23 @@ border: 1px solid #a9c1dc;
 box-shadow: 0px 1px 1px #e1e5e7;
 behavior:url(PIE.htc);
 }
+.server .ath{position: absolute;left: 0;top: 0; border-radius: 5px;border: 1px solid #ccc; vertical-align: top; width: 26px;height: 26px;}
 
 
 
 
 
 /*用户聊天记录*/
-.customer{position: relative;margin:10px 20px 10px 40px;text-align: right;clear:both;  }
+.customer{position: relative;margin:10px ;text-align: right;clear:both;white-space: nowrap;  }
 
-.customer i{position: absolute;right: -6px;_right:10px; top: 0px;width:11px;height:9px;overflow: hidden; background-position: -24px -234px;}
-.customer div{
+.customer div.cnt:before{content: ''; position: absolute;right: -9px; top: 4px;width:0px;height:0px;overflow: hidden;border-style:solid;border-color: #b9bec5 transparent transparent ;border-width:9px 9px 0 0 ;  }
+.customer div.cnt:after{content: ''; position: absolute;right: -7px; top: 5px;width:0px;height:0px;overflow: hidden;border-style:solid;border-color:  #f1f1f2 transparent transparent;border-width:9px 9px 0 0;  }
+
+.customer div.cnt{
 text-align: left;
+white-space: normal;
 position: relative;
+margin-right: 40px;
 display: inline-block;
 *display: inline;
 *zoom:1;
@@ -181,12 +195,12 @@ background: -o-linear-gradient(#f3f3f4,#e4e4e5);
 background: linear-gradient(#f3f3f4,#e4e4e5);
 -webkit-border-radius: 5px;
 -moz-border-radius: 5px;
-border-radius: 5px;
+border-radius: 8px;
 border: 1px solid #b9bec5;
 box-shadow: 0px 1px 1px #d6dadb;
 behavior:url(PIE.htc);
 } 
-
+.customer .ath{position: absolute;right: 0;top: 0; border-radius: 5px;border: 1px solid #ccc; vertical-align: top; width: 26px;height: 26px;}
 
 
 .enter_dis{position: absolute;bottom: 45px;left: 0;width: 100%;text-align: center;color: #f5f5f5;font-size: 16px;}

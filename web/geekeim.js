@@ -50,7 +50,7 @@ var test = document.createElement('div');
 
 
 		// domain 本地测试开发
-		domain = domain+'/im/web/'
+		domain = domain+'/webim/web/'
 
 
 
@@ -126,7 +126,7 @@ var test = document.createElement('div');
 		body.push('<div id="sider"></div>');
 
 		//聊天内容窗
-		body.push('<div id="chart"></div>');
+		body.push('<div id="chart"><div class="server"><div class="cnt">sfsfefe</div><img class="ath" src="images/header.jpg"></div></div>');
 
 		//输入内容
 		body.push('<div id="enter" contentEditable="true" spellcheck="false" ></div>'); 
@@ -139,7 +139,7 @@ var test = document.createElement('div');
 
 
 		// 服务人员信息
-		body.push('<div class="auth"><img id="auth" src="images/header.jpg" /><a href="#">前端工程师</a><i id="auths">&#xa500;</i><b>买了我的瓜，忘了那个他</b></div>');
+		body.push('<div class="auth"><img id="auth" src="images/header.jpg" /><a href="#">前端工程师</a><i id="auths">&#xa500;</i><div id="auths_cnt"><p><img src="images/header.jpg"/>php资深工程师</p><p><img src="images/header.jpg"/>php资深工程师</p><p><img src="images/header.jpg"/>php资深工程师</p></div><b>买了我的瓜，忘了那个他</b></div>');
 
 
 		// 窗口放大、缩小、还原、关闭
@@ -191,10 +191,12 @@ var test = document.createElement('div');
 		doc.close();
 
 
-		// 2015.3.18 任务 完成窗口事件修改 完成小窗口视图
+		// 缓存表情节点到doc 
+		doc.face_cnt = doc.getElementById('face_cnt');
+		doc.auths_cnt = doc.getElementById('auths_cnt');
+		doc.enter = doc.getElementById('enter');
+		doc.chart = doc.getElementById('chart');
 
-		// var res = {};
-		// doc.status = [];
 
 		var styleNum = function(val){
 			return isNaN(val) || val === null ? val ? val : null : val +'px';
@@ -205,8 +207,6 @@ var test = document.createElement('div');
 			// console.log(str,id)
 			return id && str.split(',').indexOf(id)>=0;
 		}
-
-
 
 		// 位置信息
 		dom.getRect = function(){
@@ -244,6 +244,8 @@ var test = document.createElement('div');
 			doc.body.className = name;
 			dom.current = name;	
 		}
+
+
 		// 抖动
 		dom.shanke = function(){
 			var time = 20;
@@ -260,8 +262,66 @@ var test = document.createElement('div');
 		}
 
 
-		// 缓存表情节点到doc 
-		doc.face_cnt = doc.getElementById('face_cnt');
+		dom.insertEnter = function(){
+			var range,canrange = typeof doc.createRange === 'function',
+			save = canrange? function(){
+				range = doc.getSelection().getRangeAt(0);
+			}:function(){
+				range = doc.selection.createRange();
+			},
+			restore = canrange ? function(){
+				var selection = doc.getSelection();
+				selection.removeAllRanges();
+				selection.addRange(range);
+			} : function(){
+				var selection = doc.selection.createRange();
+				selection.setEndPoint('EndToEnd', range);
+				selection.setEndPoint('StartToStart', range);
+				selection.select();
+			}
+			this.onmouseup = this.onkeyup = function(e) {save();}
+			this.focus();
+
+			return function (html) {
+				this.focus();
+				range && restore();
+				if (doc.selection) range.pasteHTML(html); //ie
+				else doc.execCommand("insertImage", false, html);
+				save();
+			}
+		}.call(doc.getElementById('enter'));
+
+		dom.clearEnter = function(){
+			var res = doc.enter.innerHTML;
+			doc.enter.innerHTML = '';
+			return res;
+		}
+
+
+		dom.insertChart = function(type,value){
+
+			if(type == 'system'){
+
+
+			}else if(type == 'customer'){ // 客户端聊天记录
+				var time = (new Date).getTime();
+
+				var div = doc.createElement('div');
+				div.className = 'customer';
+				div.innerHTML = '<div class="cnt">'+value+'</div><img class="ath" src="images/header.jpg"/>';
+
+
+				doc.chart.appendChild(div);
+				doc.chart.scrollTop = doc.chart.scrollHeight;
+
+			}
+
+		}
+
+
+
+
+
 
 
 
@@ -275,8 +335,6 @@ var test = document.createElement('div');
 			var tar = (function(e){return e.target || e.srcElement; })(e = e || win.event);
 			var id = (tar.getAttribute('id') || '').toLowerCase() || false;
 
-			// 表情关闭
-			this.face_cnt.style.display = 'none';
 
 			// 窗口放大缩小还原关闭
 			idIsIn('min,max,nor,clo',id) && dom.status(id);
@@ -284,11 +342,26 @@ var test = document.createElement('div');
 			// 抖动
 			idIsIn('pop',id) && dom.shanke();
 
+
+			// 表情关闭
+			this.face_cnt.style.display = 'none';
+
 			// 打开表情
 			idIsIn('face',id) && (this.face_cnt.style.display = 'block');
 
 			// 表情点击
-			idIsIn('face_cnt',tar.parentNode.getAttribute('id')) && ('');
+			idIsIn('face_cnt',tar.parentNode.getAttribute('id')) && dom.insertEnter(tar.src);
+
+
+
+			// 客服关闭
+			this.auths_cnt.style.display = 'none';
+			
+			// 打开客服
+			idIsIn('auths',id) && (this.auths_cnt.style.display = 'block');
+
+			// 客服点击
+			idIsIn('auths_cnt',tar.parentNode.getAttribute('class')) && ('');
 
 		}
 
@@ -320,8 +393,6 @@ var test = document.createElement('div');
 				}
 			);
 			
-			
-
 		}
 
 		window.onmousemove =  win.onmousemove = function(e){
@@ -340,14 +411,30 @@ var test = document.createElement('div');
 		window.onmouseup = win.onmouseup = function(e){
 			dom.removable = null;
 			dom.resizable = null;
-
 		}
+
+
+		// enter 发送消息// 回车的浏览器兼容问题～～杀很大
+		doc.enter.onkeypress = function(e) {
+			e = e || win.event;
+			var val;
+
+			if ( (e.keyCode==13||e.keyCode==10) && (val = this.innerHTML)){
+				dom.insertChart('customer',dom.clearEnter());
+				return false;
+			}
+		}
+
+
 
 
 
 
 		// 初始化
 		doc.config.default_status && dom.status(doc.config.default_status); //强制赋值
+
+
+		return {}
 
 
 
