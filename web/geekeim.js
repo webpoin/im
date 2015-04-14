@@ -208,21 +208,33 @@ var test = document.createElement('div');
 			return id && str.split(',').indexOf(id)>=0;
 		}
 
+		// 保持在窗口内
+		dom.inSize = function(){
+
+
+
+		}
 		// 位置信息
 		dom.getRect = function(){
-			var bound = this.getBoundingClientRect();
-			var client = document.documentElement;
+			var bound = this.getBoundingClientRect(),
+				client = document.documentElement,
+				width = window.innerWidth || client.clientWidth,
+				height = window.innerHeight || client.clientHeight;
+
 			return {
-				right :(window.innerWidth || client.clientWidth) + client.clientLeft - bound.right,
-				bottom : (window.innerHeight || client.clientHeight) + client.clientTop - bound.bottom,
+				right : width + client.clientLeft - bound.right,
+				bottom : height + client.clientTop - bound.bottom,
 				left : bound.left - client.clientLeft,
 				top : bound.top - client.clientTop,
 				width: bound.width,
-				height : bound.height
+				height : bound.height,
+				window_width:width,
+				window_height:height,
 			}
 		}
+
 		// 移动到
-		dom.moveto = function(x1,y1,x2,y2){			
+		dom.moveto = function(x1,y1,x2,y2){		
 			this.style.left 	= styleNum(x1);
 			this.style.top 		= styleNum(y1);
 			this.style.right 	= styleNum(x2);
@@ -244,6 +256,8 @@ var test = document.createElement('div');
 			doc.body.className = name;
 			dom.current = name;	
 		}
+
+		
 
 
 		// 抖动
@@ -346,19 +360,23 @@ var test = document.createElement('div');
 			// 表情关闭
 			this.face_cnt.style.display = 'none';
 
+			// 客服关闭
+			this.auths_cnt.style.display = 'none';
+
+
 			// 打开表情
 			idIsIn('face',id) && (this.face_cnt.style.display = 'block');
 
-			// 表情点击
-			idIsIn('face_cnt',tar.parentNode.getAttribute('id')) && dom.insertEnter(tar.src);
 
-
-
-			// 客服关闭
-			this.auths_cnt.style.display = 'none';
-			
 			// 打开客服
 			idIsIn('auths',id) && (this.auths_cnt.style.display = 'block');
+
+
+
+			if(!tar.parentNode.getAttribute) return;
+
+			// 表情点击
+			idIsIn('face_cnt',tar.parentNode.getAttribute('id')) && dom.insertEnter(tar.src);
 
 			// 客服点击
 			idIsIn('auths_cnt',tar.parentNode.getAttribute('class')) && ('');
@@ -375,7 +393,19 @@ var test = document.createElement('div');
 
 
 			// 拖动
-			idIsIn('header,auth',id) && (dom.removable = function(x,y){this.moveto(x-e.screenX+rect.left,y-e.screenY+rect.top)});
+			idIsIn('header,auth',id) && (
+				dom.removable = function(x,y){
+					var left = x-e.screenX+rect.left, 
+						top = y-e.screenY+rect.top,
+						over_width = rect.window_width - rect.width,
+						over_height = rect.window_height - rect.height;
+
+					left = left<0 ? 0 :left>over_width ? over_width : left;
+					top = top<0 ? 0 :top>over_height ? over_height : top;
+					this.moveto(left,top);
+				}
+
+			);
 			
 			// 改变大小
 			idIsIn('resize',tar.parentNode.getAttribute('class')) && (
@@ -386,10 +416,18 @@ var test = document.createElement('div');
 					id.indexOf('b')<0?rect.bottom:null
 				),
 				dom.resizable = function(x,y){
-					this.resize(
-						rect.width + (x-e.screenX)*(id.indexOf('l')<0 ? id.indexOf('r')<0 ? 0: 1:-1),
-						rect.height+ (y-e.screenY)*(id.indexOf('t')<0 ? id.indexOf('b')<0 ? 0: 1:-1)
-					);
+					var l_r = (id.indexOf('l') < 0 ? id.indexOf('r')<0 ? 0: 1:-1),
+						t_b = (id.indexOf('t')< 0 ? id.indexOf('b')<0 ? 0: 1:-1),
+
+					width = rect.width + (x-e.screenX)*l_r,
+					height = rect.height+ (y-e.screenY)*t_b,
+
+					over_width  = l_r <0 ? rect.window_width - rect.right : rect.window_width - rect.left,
+					over_height = t_b <0 ? rect.window_height - rect.bottom : rect.window_height - rect.top;
+
+					width =  width<0 ? 0 : width > over_width ? over_width : width;
+					height =  height<0 ? 0 : height > over_height ? over_height : height;
+					this.resize(width,height);
 				}
 			);
 			
@@ -404,13 +442,12 @@ var test = document.createElement('div');
 			// 改变大小
 			dom.resizable && dom.resizable.call(dom,e.screenX,e.screenY);
 
-
 			return false;
 		}
 
 		window.onmouseup = win.onmouseup = function(e){
-			dom.removable = null;
-			dom.resizable = null;
+			dom.removable && (dom.removable = null);
+			dom.resizable && (dom.resizable = null);
 		}
 
 
@@ -426,6 +463,8 @@ var test = document.createElement('div');
 		}
 
 
+		// 切换客服
+		// 打开历史记录
 
 
 
@@ -434,366 +473,12 @@ var test = document.createElement('div');
 		doc.config.default_status && dom.status(doc.config.default_status); //强制赋值
 
 
-		return {}
-
-
-
-		// // 提交事件
-		// var commit = function(val){}
-
-		// // 设置|获取 窗口状态
-		// var status = function (sta) {
-			
-		// 	if(!sta) return config.status;
-
-		// 	config.status = sta;
-		// 	doc.body.className = sta;
-
-		// 	var status = config[sta],
-		// 		style = status.position.concat(status.size),
-		// 		name  = ['top','right','bottom','left','width','height'];
-
-		// 	// 定位 和大小
-		// 	for(var i=0,x;i<6;i++){
-		// 		x = style[i];
-		// 		dom.style[name[i]] = typeof(x) === 'string' && x[x.length-1] === '%' ? x : typeof(x) === 'number' ?  x+'px' :null ;
-		// 	}
-
-		// 	// 边距
-		// 	dom.style.margin = status.margin.join('px ')+ 'px';
-		// }
-
-
-
-		// // 编辑器插入 insertEnter(html)
-		// var insertEnter = (function(win,doc){
-
-		// 	var enter = doc.getElementById('enter');
-
-		// 	// 标准浏览器
-		// 	if (!/(rv:[\d.]+\) like gecko)|(msie [\d.]+)/.test(navigator.userAgent.toLowerCase())) {
-		// 		// 获取焦点位置
-		// 		return function(html) {
-		// 			enter.focus();
-		// 			doc.execCommand('insertHtml', false, html);
-		// 		}
-		// 	} 
-
-		// 	// 低版本ie<=ie10
-		// 	if (doc.selection) {
-		// 		return function(html) {
-		// 			enter.focus();
-		// 			var range = doc.selection.createRange();
-		// 			range.pasteHTML(html);
-		// 			range.select();
-		// 			range.collapse(false);
-		// 		}
-		// 	} 
-
-
-		// 	// 高版本ie
-		// 	return function(html) {
-		// 		enter.focus();
-		// 		var range = win.getSelection().getRangeAt(0);
-		// 		range.collapse(false);
-		// 		var hasR = range.createContextualFragment(html);
-		// 		var hasR_lastChild = hasR.lastChild;
-		// 		while (hasR_lastChild && hasR_lastChild.nodeName.toLowerCase() == "br" && hasR_lastChild.previousSibling && hasR_lastChild.previousSibling.nodeName.toLowerCase() == "br") {
-		// 			var e = hasR_lastChild;
-		// 			hasR_lastChild = hasR_lastChild.previousSibling;
-		// 			hasR.removeChild(e)
-		// 		}
-		// 		range.insertNode(hasR);
-		// 		if (hasR_lastChild) {
-		// 			range.setEndAfter(hasR_lastChild);
-		// 			range.setStartAfter(hasR_lastChild)
-		// 		}
-		// 	}
-		// })(win,doc);
-
-
-
-		// // 添加聊天内容 insertChart({type:'classname',value:'massages value'})
-		// var insertChart = (function (doc) {
-
-		// 	var chart = doc.getElementById('chart');
-
-		// 	return function(json){
-
-		// 		var div = doc.createElement('div');
-
-		// 		if (json.type) div.className = json.type;
-
-		// 		div.innerHTML = '<div>' + json.value + '</div><i></i>';
-
-		// 		chart.appendChild(div);
-		// 		chart.scrollTop = chart.scrollHeight;
-		// 	}	
-		// })(doc);
-
-
-		// // 抖动
-		// var shanke = (function(dom){
-
-		// 	var time = 0;
-		// 	var timeout =  3000 ;//抖动时间间隔
-
-		// 	return function(){
-		// 		var newtime = (new Date()).getTime();
-
-		// 		if(  newtime - time > timeout){
-
-		// 			time = newtime;
-
-		// 			var c,s,i=0,
-		// 			m = config[config.status].margin,
-		// 			t = m.slice(0),
-		// 			interval = setInterval(function(){
-		// 				c = i%2;
-		// 				s = (i++)%4 <2 ? 0:4;
-
-		// 				t[c] = m[c] -s;
-		// 				t[c+2] = m[c+2] +s;
-
-		// 				dom.style.margin = t.join('px ') + 'px';
-
-		// 				if(i>17){
-		// 					clearInterval(interval);
-		// 					i=0;
-		// 				}
-
-		// 			},20);
-
-
-		// 		}else{
-		// 			insertChart({type:'system',value:'您抖动太频繁，请稍后再试'})
-		// 		}
-		// 	}
-		// })(dom);
-
-
-		// 移动
-		// doc.getElementById('header').onmousedown = function(e){
-
-		// 	// 是否支持移动
-		// 	var status = config[config.status];
-
-		// 	if( !status.removable) return;
-
-		// 	e = e || win.event;
-		// 	var form = [e.screenX,e.screenY],
-		// 		client = [e.clientX,e.clientY],
-		// 		rect = dom.getBoundingClientRect(),
-		// 		// 偏移
-		// 		margin = [
-		// 			status.margin[0] - form[1],
-		// 			status.margin[1] + form[0],
-		// 			status.margin[2] + form[1],
-		// 			status.margin[3] - form[0]
-		// 		],
-		// 		// 范围 -2px 容错，防抖动
-		// 		range = [
-		// 			form[0] - rect.left ,
-		// 			form[0] - rect.left + window.parseFloat(window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth || 0) - dom.offsetWidth -2,
-		// 			form[1] - rect.top,
-		// 			form[1] - rect.top + window.parseFloat(window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight || 0) - dom.offsetHeight -2,
-		// 		];
-
-		// 	doc.onmousemove = function(e) {
-		// 		//元素将移动到的位置
-		// 		e = e || win.event;
-		// 		var to = [e.screenX,e.screenY];
-
-		// 		// 限制范围
-		// 		to[0] = to[0] < range[0] ? range[0] :to[0] >range[1] ? range[1] :to[0];
-		// 		to[1] = to[1] < range[2] ? range[2] :to[1] >range[3] ? range[3] :to[1];
-
-		// 		status.margin = [
-		// 			margin[0] + to[1],
-		// 			margin[1] - to[0],
-		// 			margin[2] - to[1],
-		// 			margin[3] + to[0] 
-		// 		]
-		// 		//改变css
-		// 		dom.style.margin = status.margin.join('px ') + 'px';
-		// 		return false;
-		// 	}
-
-		// 	doc.onmouseup = win.onblur = function() {
-		// 		doc.onmousemove = doc.onmouseup = win.onblur = origin = margin = status =null;
-		// 	}
-		// }
-
-		// // 改变大小
-		// doc.getElementById('resize').onmousedown = function(e){
-
-
-		// 	e = e || win.event;
-		// 	var target = e.target || e.srcElement;
-		// 	var status = config[config.status];
-
-		// 	// 是否支持改变大小
-		// 	if(target.tagName.toLowerCase() !== 'b' || !status.resizable) return;
-			
-
-		// 	var name = target.className,
-		// 		rect = dom.getBoundingClientRect(),
-		// 		form = [e.screenX,e.screenY],
-		// 		client = [e.clientX,e.clientY],
-		// 		dire = [
-		// 			name.indexOf('t') > -1,
-		// 			name.indexOf('r') > -1,
-		// 			name.indexOf('b') > -1,
-		// 			name.indexOf('l') > -1
-		// 		],
-		// 		margin = [
-		// 			status.margin[0] - form[1],
-		// 			status.margin[1] + form[0],
-		// 			status.margin[2] + form[1],
-		// 			status.margin[3] - form[0]
-		// 		],
-		// 		size = [
-		// 			dom.offsetWidth,
-		// 			dom.offsetHeight,
-		// 		],
-		// 		// 范围 -2px 容错，防抖动
-		// 		range = [
-		// 			form[0] - client[0] - rect.left ,
-		// 			form[0] - client[0] - rect.left + window.parseFloat(window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth || 0) -2,
-		// 			form[1] - client[1] - rect.top,
-		// 			form[1] - client[1] - rect.top + window.parseFloat(window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight || 0) -2,
-		// 		];
-
-		// 	doc.onmousemove = function(e) {
-		// 		//元素将移动到的位置
-		// 		e = e || win.event;
-		// 		var to = [e.screenX,e.screenY];
-
-		// 		// 限制鼠标范围
-		// 		to[0] = to[0] < range[0] ? range[0] :to[0] >range[1] ? range[1] :to[0];
-		// 		to[1] = to[1] < range[2] ? range[2] :to[1] >range[3] ? range[3] :to[1];
-			
-				
-		// 		status.size[0] =  dire[1] ? size[0] + to[0] - form[0] : dire[3] ? size[0] - to[0] + form[0] : status.size[0];
-		// 		status.size[1] =  dire[0] ? size[1] - to[1] + form[1] : dire[2] ? size[1] + to[1] - form[1] : status.size[1];
-
-		// 		// 最小宽度
-		// 		status.size[0] = status.size[0] <100 ? 100 :status.size[0];
-		// 		status.size[1] = status.size[1] <100 ? 100 :status.size[1];
-
-		// 		status.margin[0] = dire[0] ? margin[0] + to[1] : status.margin[0];
-		// 		status.margin[1] = dire[1] ? margin[1] - to[0] : status.margin[1];
-		// 		status.margin[2] = dire[2] ? margin[2] - to[1] : status.margin[2];
-		// 		status.margin[3] = dire[3] ? margin[3] + to[0] : status.margin[3];
-
-		// 		dom.style.width =  status.size[0] +'px';
-		// 		dom.style.height = status.size[1] +'px';
-		// 		dom.style.margin = status.margin.join('px ') + 'px';
-
-		// 		return false;
-		// 	}
-
-		// 	doc.onmouseup = win.onblur = function() {
-		// 		doc.onmousemove = doc.onmouseup = win.onblur = dire =  margin = size = origin = status = null;
-		// 	}
-		// }
-
-		// // 最大化，最小化，还原，关闭
-		// doc.getElementById('view').onclick = function(e) {
-
-		// 	e = e || win.event;
-		// 	var target = e.target || e.srcElement;
-		// 	var name = target.className;
-
-		// 	target.tagName.toLowerCase() === 'i' && name !== config.status && status(name);
-
-		// 	return false;
-		// }
-
-		// // enter 发送消息// 回车的浏览器兼容问题～～杀很大
-		// doc.getElementById('enter').onkeypress = function(e) {
-		// 	e = e || win.event;
-		// 	var val;
-
-		// 	if ( (e.keyCode==13||e.keyCode==10) && (val = this.innerHTML)){
-
-		// 		commit(val);
-		// 		this.innerHTML = '';
-		// 		return false;
-		// 	}
-		// }
-
-		// // 表情
-		// doc.getElementById('tools_face').onclick = function(e){
-		// 	e = e || win.event;
-		// 	// 阻止默认冒泡
-		// 	if (!e.stopPropagation) { //ie
-		// 		e.cancelBubble = true;
-
-		// 		//标准浏览器
-		// 	} else { 
-		// 		e.stopPropagation();
-		// 	}
-
-		// 	var face = doc.getElementById('tools_face_cnt')
-		// 	face.style.display = face.style.display === 'block' ? 'none' :'block';
-		// }
-
-		// // 表情内容点击
-		// doc.getElementById('tools_face_cnt').onclick = function(e){
-		// 	e = e || win.event;
-		// 	var tar = e.target || e.srcElement;
-		// 	tar.tagName.toLowerCase() === 'img' && tar.src && insertEnter('<img src="'+tar.src+'" />');
-		// }
-
-		// // 抖动
-		// doc.getElementById('tools_pop').onclick = shanke;
-
-
-
-		// // 上传图片(直接上传到服务器缓存，方便实时聊天监控，当提交时，服务器保存图片)
-		// doc.getElementById('tools_pic').getElementsByTagName('input')[0].onchange = function(){
-		// 	this.parentNode.submit();
-		// };
-
-		// doc.getElementById('tools_pic').onsubmit = function(e){
-		// 	e = e || win.event;
-
-		// 	// 取图片放入输入框内；不进行反馈
-		// 	insertEnter('<img src="'+tar.src+'" />');
-
-
-
-
-		// 	// 异步上传图片
-		// 	// doc.getElementById('iframe').onload = function(){
-
-
-		// 	// 	console.log('load');
-
-		// 	// }
-
-		// 	// console.log('submit');
-		// }
-
-		// // 总代理
-		// doc.onclick = function(){
-		// 	doc.getElementById('tools_face_cnt').style.display = 'none';
-		// }
-
-	
-		// dom.style.display = 'block';
-		// return {
-		// 	dom:dom,
-		// 	win:win,
-		// 	doc:doc,
-		// 	status:status,
-		// 	insertEnter:insertEnter,
-		// 	insertChart:insertChart,
-		// 	hide:function(){dom.style.display = 'none';},
-		// 	show:function(){dom.style.display = 'block';},
-		// 	commit:function(fuc){if( fuc && typeof(fuc) === 'function') commit = fuc;},
-		// }
+		return {
+			insertEnter :dom.insertEnter,
+			insertChart : dom.insertChart,
+			doc:doc,
+			events:function(type,dis){}
+		};
 	})(window,document,config);
 
 	
