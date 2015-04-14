@@ -208,12 +208,7 @@ var test = document.createElement('div');
 			return id && str.split(',').indexOf(id)>=0;
 		}
 
-		// 保持在窗口内
-		dom.inSize = function(){
 
-
-
-		}
 		// 位置信息
 		dom.getRect = function(){
 			var bound = this.getBoundingClientRect(),
@@ -397,11 +392,11 @@ var test = document.createElement('div');
 				dom.removable = function(x,y){
 					var left = x-e.screenX+rect.left, 
 						top = y-e.screenY+rect.top,
-						over_width = rect.window_width - rect.width,
-						over_height = rect.window_height - rect.height;
+						max_left = rect.window_width - rect.width,
+						max_top = rect.window_height - rect.height;
 
-					left = left<0 ? 0 :left>over_width ? over_width : left;
-					top = top<0 ? 0 :top>over_height ? over_height : top;
+					left = left<0 ? 0 :left>max_left ? max_left : left;
+					top = top<0 ? 0 :top>max_top ? max_top : top;
 					this.moveto(left,top);
 				}
 
@@ -421,12 +416,12 @@ var test = document.createElement('div');
 
 					width = rect.width + (x-e.screenX)*l_r,
 					height = rect.height+ (y-e.screenY)*t_b,
+					max_width  = l_r <0 ? rect.window_width - rect.right : rect.window_width - rect.left,
+					max_height = t_b <0 ? rect.window_height - rect.bottom : rect.window_height - rect.top;
+					
+					width =  width<200 ? 200 : width > max_width ? max_width : width;
+					height =  height<200 ? 200 : height > max_height ? max_height : height;
 
-					over_width  = l_r <0 ? rect.window_width - rect.right : rect.window_width - rect.left,
-					over_height = t_b <0 ? rect.window_height - rect.bottom : rect.window_height - rect.top;
-
-					width =  width<0 ? 0 : width > over_width ? over_width : width;
-					height =  height<0 ? 0 : height > over_height ? over_height : height;
 					this.resize(width,height);
 				}
 			);
