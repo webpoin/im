@@ -333,12 +333,6 @@ var test = document.createElement('div');
 
 
 
-
-
-
-
-
-
 		// 事件
 		doc.onclick = function(e){
 			var tar = (function(e){return e.target || e.srcElement; })(e = e || win.event);

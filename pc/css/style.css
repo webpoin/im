@@ -157,3 +157,8 @@ section{position: absolute;left: 0;width: 100%;top: 73px;bottom: 0;overflow: hid
 .talks_recode input{line-height: 18px;height: 18px;padding: 2px 5px;width: 60%;margin-left: -5px; margin-bottom: 5px;border:1px solid #ccc;border-radius: 2px;outline: none;}
 .talks_recode textarea{width: 100%;margin-left: -5px;border:1px solid #ccc;border-radius: 2px;outline: none;}
 
+
+
+
+
+#chart{border:1px solid #ddd;height: 200px;}
