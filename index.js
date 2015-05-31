@@ -1,8 +1,46 @@
 var express = require('express');
+var hbs = require('hbs');
+
+// 客户端
+var api = express();
+
+// 模板引擎
+api.set('view engine', 'html');
+api.engine('html', hbs.__express);
+
+api.get('/', function(req, res){res.render('client/index');});
+api.use('/api', express.static(__dirname + '/public/client/geekeim.js'));
+api.use('/css', express.static(__dirname + '/public/client/'));
+api.use('/images', express.static(__dirname + '/public/client/images'));
+
+
+// 服务端
 var app = express();
+app.set('view engine', 'html');
+app.engine('html', hbs.__express);
 
-app.get('/', function(req, res){
-  res.send('fuck you');
-});
 
+
+
+app.get('/', function(req, res){res.render('server/index');});
+app.use('/public', express.static(__dirname + '/public'));
+app.use('/js', express.static(__dirname + '/public/js'));
+app.use('/images', express.static(__dirname + '/public/images'));
+app.use('/css', express.static(__dirname + '/public/css'));
+
+
+
+
+api.listen(2000);
 app.listen(3000);
+
+
+
+
+
+
+
+
+
+
+

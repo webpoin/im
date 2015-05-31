@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app>
 <head>
 	<meta charset="UTF-8">
 	<title>pc 端用户界面</title>
-	<link rel="icon" href="http://pc.im.com/favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="http://pc.im.com/favicon.ico" type="image/x-icon" />
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="/css/style.css">
+	<script src="/js/angular/src/angular.js"></script>
 </head>
 <body>
 	
@@ -317,18 +318,142 @@
 
 		<div style="display:flex;flex-grow:1;flex-direction:column;margin:5px 0;">
 			<div class="talls_webim">
-				
+				<div id="header"></div>
+				<div id="sider"></div>
 				<div id="chart">
-					
-					消息内容
+					<div class="server">
+						<div class="cnt">sfsfefe</div>
+						<img class="ath" src="images/header.jpg" />
+					</div>
+					<div class="customer">
+						<div class="cnt">
+							<img src="http://localhost:2000/images/3.gif" />
+						</div>
+						<img class="ath" src="images/header.jpg" />
+					</div>
 				</div>
-				<div id="enter">
-					<form action="#">
-						<input type="text" >
-						<input type="submit" value="提交">
-					</form>
-					输入内容
+				<div id="enter" contenteditable="true" spellcheck="false"></div>
+				<div class="enter">按Enter键发送</div>
+				<div class="auth">
+					<img id="auth" src="images/header.jpg" />
+					<a href="#">前端工程师</a>
+					<i id="auths">ꔀ</i>
+					<div id="auths_cnt" style="display: none;">
+						<p><img src="images/header.jpg" />php资深工程师</p>
+						<p><img src="images/header.jpg" />php资深工程师</p>
+						<p><img src="images/header.jpg" />php资深工程师</p>
+					</div>
+					<b>买了我的瓜，忘了那个他</b>
 				</div>
+				<div class="view">
+					<i id="min" title="最小化">ꀁ</i>
+					<i id="nor" title="还原">ꀂ</i>
+					<i id="max" title="最大化">ꀃ</i>
+					<i id="clo" title="关闭">ꀄ</i>
+				</div>
+				<div class="meta">
+					<i id="qq">ꄀ</i>
+					<i id="video">ꄁ</i>
+					<i id="voice">ꄂ</i>
+				</div>
+				<div class="tools">
+					<i id="face">ꈀ</i>
+					<i id="pop">ꈁ</i>
+					<i id="cut">ꈂ</i>
+					<i>ꈃ<form id="pic" action="updatapic.php" enctype="multipart/form-data" method="post" target="iframe"><input type="file" name="pic" /></form></i>
+					<i>ꈄ<form id="file" action="updatafile.php" enctype="multipart/form-data" method="post" target="iframe"><input type="file" name="file" /></form></i>
+					<i id="hist">ꈅ</i>
+					<i id="switch">ꈐ</i>
+				</div>
+				<div class="resize">
+					<b id="t"></b>
+					<b id="r"></b>
+					<b id="b"></b>
+					<b id="l"></b>
+					<b id="lt"></b>
+					<b id="tr"></b>
+					<b id="rb"></b>
+					<b id="bl"></b>
+				</div>
+				<div id="face_cnt" style="display: none;">
+					<img src="images/1.gif" />
+					<img src="images/2.gif" />
+					<img src="images/3.gif" />
+					<img src="images/4.gif" />
+					<img src="images/5.gif" />
+					<img src="images/6.gif" />
+					<img src="images/7.gif" />
+					<img src="images/8.gif" />
+					<img src="images/9.gif" />
+					<img src="images/10.gif" />
+					<img src="images/11.gif" />
+					<img src="images/12.gif" />
+					<img src="images/13.gif" />
+					<img src="images/14.gif" />
+					<img src="images/15.gif" />
+					<img src="images/16.gif" />
+					<img src="images/17.gif" />
+					<img src="images/18.gif" />
+					<img src="images/19.gif" />
+					<img src="images/20.gif" />
+					<img src="images/21.gif" />
+					<img src="images/22.gif" />
+					<img src="images/23.gif" />
+					<img src="images/24.gif" />
+					<img src="images/25.gif" />
+					<img src="images/26.gif" />
+					<img src="images/27.gif" />
+					<img src="images/28.gif" />
+					<img src="images/29.gif" />
+					<img src="images/30.gif" />
+					<img src="images/31.gif" />
+					<img src="images/32.gif" />
+					<img src="images/33.gif" />
+					<img src="images/34.gif" />
+					<img src="images/35.gif" />
+					<img src="images/36.gif" />
+					<img src="images/37.gif" />
+					<img src="images/38.gif" />
+					<img src="images/39.gif" />
+					<img src="images/40.gif" />
+					<img src="images/41.gif" />
+					<img src="images/42.gif" />
+					<img src="images/43.gif" />
+					<img src="images/44.gif" />
+					<img src="images/45.gif" />
+					<img src="images/46.gif" />
+					<img src="images/47.gif" />
+					<img src="images/48.gif" />
+					<img src="images/49.gif" />
+					<img src="images/50.gif" />
+					<img src="images/51.gif" />
+					<img src="images/52.gif" />
+					<img src="images/53.gif" />
+					<img src="images/54.gif" />
+					<img src="images/55.gif" />
+					<img src="images/56.gif" />
+					<img src="images/57.gif" />
+					<img src="images/58.gif" />
+					<img src="images/59.gif" />
+					<img src="images/60.gif" />
+					<img src="images/61.gif" />
+					<img src="images/62.gif" />
+					<img src="images/63.gif" />
+					<img src="images/64.gif" />
+					<img src="images/65.gif" />
+					<img src="images/66.gif" />
+					<img src="images/67.gif" />
+					<img src="images/68.gif" />
+					<img src="images/69.gif" />
+					<img src="images/70.gif" />
+					<img src="images/71.gif" />
+					<img src="images/72.gif" />
+					<img src="images/73.gif" />
+					<img src="images/74.gif" />
+					<img src="images/75.gif" />
+				</div>
+				<iframe frameborder="0" id="iframe" name="iframe" style="display:none;"></iframe>
+				<div id="other"></div>
 
 			</div>
 			<div class="talks_reply">
@@ -517,7 +642,24 @@
 	<!-- 使用帮助 -->
 	<section style="display: none;"></section>
 
+<!-- 
+	<script src="/js/seajs/dist/sea.js"></script>
+	<script>
 
+
+		seajs.config({
+			base: "/js/",
+			alias: {
+			"angular": "jquery/jquery/1.10.1/jquery.js"
+			}
+		});
+
+		seajs.use("main");
+
+
+	</script>
+ -->
+	
 
 
 	
