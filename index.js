@@ -19,10 +19,10 @@ var app = express();
 app.set('view engine', 'html');
 app.engine('html', hbs.__express);
 
+// 直接输出html
+app.get('/', function(req, res){res.sendFile(__dirname +'/views/server/index.html');});
 
 
-
-app.get('/', function(req, res){res.render('server/index');});
 app.use('/public', express.static(__dirname + '/public'));
 app.use('/js', express.static(__dirname + '/public/js'));
 app.use('/images', express.static(__dirname + '/public/images'));
