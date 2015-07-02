@@ -13,7 +13,15 @@ var db = monk('localhost:27017/webim');
 
 // 首页
 router.get('/', function(req, res, next) {
-	console.log('setting session in routes/index.js')
+	console.log('setting session in routes/index.js');
+
+
+	// 从数据库中读入客服id
+	req.session.serverid =  123456;
+	req.session.type = 'server';
+
+
+
 	req.session.test = 'fuck';
 	res.sendFile(views + '/index.html');
 });
